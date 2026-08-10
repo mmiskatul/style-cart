@@ -1,10 +1,10 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
 
-import heroImage from "@/assets/hero-runner.jpg";
 import { ProductGrid } from "@/components/shop/ProductCard";
 import { ErrorState } from "@/components/shop/States";
 import { categoriesQuery, productsQuery } from "@/lib/queries.client";
+
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => {
