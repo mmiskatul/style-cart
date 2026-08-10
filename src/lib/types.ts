@@ -56,15 +56,6 @@ export type Order = {
   created_at: string;
 };
 
-export const ORDER_STATUSES = [
-  "pending",
-  "confirmed",
-  "processing",
-  "shipped",
-  "delivered",
-  "cancelled",
-] as const;
-
 export const FREE_SHIPPING_THRESHOLD_CENTS = 15000;
 export const SHIPPING_FLAT_CENTS = 800;
 
