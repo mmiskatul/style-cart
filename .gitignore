@@ -14,7 +14,12 @@ dist-ssr
 .vinxi
 .tanstack/**
 .nitro
+.next
+next-env.d.ts
 *.local
+.env
+.env.local
+.env.*.local
 
 # Wrangler / Cloudflare
 .wrangler/
@@ -30,3 +35,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.tsbuildinfo
