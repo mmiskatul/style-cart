@@ -3,7 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 import { PRODUCT_COLUMNS } from "./queries";
-import { productInputSchema } from "./schemas";
+import { saveProductSchema } from "./schemas";
 import type { Order, Product } from "./types";
 
 export const getMyAccount = createServerFn({ method: "GET" })
@@ -61,13 +61,8 @@ export const adminGetProduct = createServerFn({ method: "GET" })
 
 export const adminSaveProduct = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: unknown) => {
-    const parsed = productInputSchema
-      .extend({ id: productInputSchema.shape.slug.optional() })
-      .omit({})
-      .parse(data as Record<string, unknown>);
-    return parsed as typeof parsed & { id?: string };
-  })
+  .inputValidator((data: unknown) => saveProductSchema.parse(data))
+
   .handler(async ({ context, data }) => {
     const { data: isAdmin } = await context.supabase.rpc("has_role", {
       _user_id: context.userId,

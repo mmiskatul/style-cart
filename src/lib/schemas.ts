@@ -43,3 +43,7 @@ export const productInputSchema = z.object({
 
 export type ProductInput = z.infer<typeof productInputSchema>;
 export type CustomerInput = z.infer<typeof customerSchema>;
+
+export const saveProductSchema = productInputSchema.extend({
+  id: z.string().uuid().optional(),
+});
