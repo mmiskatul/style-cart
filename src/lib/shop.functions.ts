@@ -1,10 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 
+import { PRODUCT_COLUMNS } from "./queries";
 import { checkoutSchema } from "./schemas";
 import type { Category, Order, OrderItem, Product } from "./types";
 
-const PRODUCT_COLUMNS =
-  "id,name,slug,description,price_cents,images,category_id,tags,inventory,status,featured,sales_count,created_at,category:categories(name,slug)";
 
 export const listProducts = createServerFn({ method: "GET" }).handler(async () => {
   const { getPublicClient } = await import("./db.server");
