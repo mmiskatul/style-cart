@@ -6,12 +6,13 @@ import { useAuthUser } from "@/hooks/use-auth-user";
 import { cartCount, useCart } from "@/lib/cart-store";
 
 const NAV = [
-  { to: "/", label: "Home" },
-  { to: "/products", label: "Shop" },
-  { to: "/category/footwear", label: "Footwear" },
-  { to: "/category/apparel", label: "Apparel" },
-  { to: "/category/home", label: "Home Goods" },
-] as const;
+  { label: "Home", to: "/" as const, params: undefined },
+  { label: "Shop", to: "/products" as const, params: undefined },
+  { label: "Footwear", to: "/category/$slug" as const, params: { slug: "footwear" } },
+  { label: "Apparel", to: "/category/$slug" as const, params: { slug: "apparel" } },
+  { label: "Home Goods", to: "/category/$slug" as const, params: { slug: "home-goods" } },
+];
+
 
 export function Header() {
   const [open, setOpen] = useState(false);
