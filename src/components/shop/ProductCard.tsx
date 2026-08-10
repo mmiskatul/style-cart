@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 
 import { formatPrice } from "@/lib/format";
 import type { Product } from "@/lib/types";
@@ -9,8 +9,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link
-      to="/products/$slug"
-      params={{ slug: product.slug }}
+      href={`/products/${product.slug}`}
       className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       <div className="relative overflow-hidden rounded-sm bg-secondary">
