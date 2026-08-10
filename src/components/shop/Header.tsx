@@ -1,18 +1,19 @@
-import { Link, useNavigate } from "@tanstack/react-router";
-import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
+"use client";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { useAuthUser } from "@/hooks/use-auth-user";
 import { cartCount, useCart } from "@/lib/cart-store";
 
 const NAV = [
-  { label: "Home", to: "/" as const, params: undefined },
-  { label: "Shop", to: "/products" as const, params: undefined },
-  { label: "Footwear", to: "/category/$slug" as const, params: { slug: "footwear" } },
-  { label: "Apparel", to: "/category/$slug" as const, params: { slug: "apparel" } },
-  { label: "Home Goods", to: "/category/$slug" as const, params: { slug: "home-goods" } },
+  { label: "Home", href: "/" },
+  { label: "Shop", href: "/products" },
+  { label: "Footwear", href: "/category/footwear" },
+  { label: "Apparel", href: "/category/apparel" },
+  { label: "Home Goods", href: "/category/home-goods" },
 ];
-
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -20,8 +21,7 @@ export function Header() {
   const [term, setTerm] = useState("");
   const [mounted, setMounted] = useState(false);
   const lines = useCart((s) => s.lines);
-  const { user } = useAuthUser();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => setMounted(true), []);
   const count = mounted ? cartCount(lines) : 0;
@@ -32,7 +32,7 @@ export function Header() {
     if (!q) return;
     setSearchOpen(false);
     setOpen(false);
-    navigate({ to: "/search", search: { q } });
+    router.push(`/search?q=${encodeURIComponent(q)}`);
   }
 
   return (
@@ -46,7 +46,7 @@ export function Header() {
           >
             <Menu className="h-5 w-5" aria-hidden />
           </button>
-          <Link to="/" className="display shrink-0 text-xl tracking-tight">
+          <Link href="/" className="display shrink-0 text-xl tracking-tight">
             Terrahaus
           </Link>
         </div>
@@ -54,9 +54,8 @@ export function Header() {
         <nav className="hidden items-center justify-center gap-8 lg:flex">
           {NAV.map((item) => (
             <Link
-              key={item.to}
-              to={item.to}
-              activeOptions={{ exact: item.to === "/" }}
+              key={item.href}
+              href={item.href}
               className="text-sm text-muted-foreground transition-colors hover:text-foreground data-[status=active]:text-foreground"
             >
               {item.label}
@@ -72,10 +71,7 @@ export function Header() {
           >
             <Search className="h-5 w-5" aria-hidden />
           </button>
-          <Link to={user ? "/account" : "/auth"} className="p-2" aria-label="Account">
-            <User className="h-5 w-5" aria-hidden />
-          </Link>
-          <Link to="/cart" className="relative p-2" aria-label={`Cart, ${count} items`}>
+          <Link href="/cart" className="relative p-2" aria-label={`Cart, ${count} items`}>
             <ShoppingBag className="h-5 w-5" aria-hidden />
             {count > 0 && (
               <span className="absolute right-0 top-0 grid h-4 min-w-4 place-items-center rounded-full bg-primary px-1 text-[10px] text-primary-foreground">
@@ -112,15 +108,15 @@ export function Header() {
           <nav className="flex flex-col gap-1 px-4 pt-4">
             {NAV.map((item) => (
               <Link
-                key={item.to}
-                to={item.to}
+                key={item.href}
+                href={item.href}
                 onClick={() => setOpen(false)}
                 className="display border-b border-border py-4 text-2xl"
               >
                 {item.label}
               </Link>
             ))}
-            <Link to="/cart" onClick={() => setOpen(false)} className="display py-4 text-2xl">
+            <Link href="/cart" onClick={() => setOpen(false)} className="display py-4 text-2xl">
               Cart ({count})
             </Link>
           </nav>

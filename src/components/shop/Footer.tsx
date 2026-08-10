@@ -1,4 +1,6 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -8,7 +10,7 @@ export function Footer() {
   return (
     <footer className="mt-24 border-t border-border bg-secondary/40">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
+        <div className="grid gap-12 md:grid-cols-[1.2fr_1fr]">
           <div>
             <h2 className="display text-2xl">Stay in the loop</h2>
             <p className="mt-2 max-w-sm text-sm text-muted-foreground">
@@ -44,48 +46,28 @@ export function Footer() {
             <h3 className="eyebrow text-muted-foreground">Shop</h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <Link to="/products" className="hover:underline">
+                <Link href="/products" className="hover:underline">
                   All products
                 </Link>
               </li>
               <li>
-                <Link to="/category/$slug" params={{ slug: "footwear" }} className="hover:underline">
+                <Link href="/category/footwear" className="hover:underline">
                   Footwear
                 </Link>
               </li>
               <li>
-                <Link to="/category/$slug" params={{ slug: "apparel" }} className="hover:underline">
+                <Link href="/category/apparel" className="hover:underline">
                   Apparel
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/category/$slug"
-                  params={{ slug: "accessories" }}
-                  className="hover:underline"
-                >
+                <Link href="/category/accessories" className="hover:underline">
                   Accessories
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="eyebrow text-muted-foreground">Account</h3>
-            <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <Link to="/auth" className="hover:underline">
-                  Sign in
-                </Link>
-              </li>
-              <li>
-                <Link to="/cart" className="hover:underline">
+                <Link href="/cart" className="hover:underline">
                   Cart
-                </Link>
-              </li>
-              <li>
-                <Link to="/account" className="hover:underline">
-                  Orders
                 </Link>
               </li>
             </ul>
