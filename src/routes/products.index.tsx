@@ -15,7 +15,7 @@ const searchSchema = z.object({
   sort: z.enum(["newest", "price-asc", "price-desc", "popular"]).optional(),
 });
 
-export const Route = createFileRoute("/products")({
+export const Route = createFileRoute("/products/")({
   validateSearch: searchSchema,
   loader: ({ context }) => {
     context.queryClient.ensureQueryData(productsQuery);
