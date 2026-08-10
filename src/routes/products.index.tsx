@@ -114,7 +114,7 @@ function ProductsPage() {
             <ul className="mt-3 space-y-1.5 text-sm">
               <li>
                 <button
-                  onClick={() => navigate({ to: "/products", search: (prev) => ({ ...prev, category: undefined }) })}
+                  onClick={() => navigate({ to: "/products", search: (prev: z.infer<typeof searchSchema>) => ({ ...prev, category: undefined }) })}
                   className={!search.category ? "font-medium" : "text-muted-foreground"}
                 >
                   All
@@ -124,7 +124,7 @@ function ProductsPage() {
                 <li key={category.id}>
                   <button
                     onClick={() =>
-                      navigate({ to: "/products", search: (prev) => ({ ...prev, category: category.slug }) })
+                      navigate({ to: "/products", search: (prev: z.infer<typeof searchSchema>) => ({ ...prev, category: category.slug }) })
                     }
                     className={
                       search.category === category.slug ? "font-medium" : "text-muted-foreground"
@@ -187,7 +187,7 @@ function ProductsPage() {
               value={search.sort ?? "newest"}
               onChange={(e) =>
                 navigate({ to: "/products",
-                  search: (prev) => ({
+                  search: (prev: z.infer<typeof searchSchema>) => ({
                     ...prev,
                     sort: e.target.value as "newest" | "price-asc" | "price-desc" | "popular",
                   }),
