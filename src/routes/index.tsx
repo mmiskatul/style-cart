@@ -60,7 +60,7 @@ function Home() {
           </div>
           <div className="relative min-h-[320px] lg:min-h-[620px]">
             <img
-              src={heroImage}
+              src="/images/hero.jpg"
               alt="Wool runners resting on warm sand"
               className="h-full w-full object-cover"
             />
