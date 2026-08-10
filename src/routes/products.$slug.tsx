@@ -125,9 +125,18 @@ function ProductDetail() {
             <button
               disabled={soldOut}
               onClick={() => {
-                add(product, quantity);
+                add({
+                  product_id: product.id,
+                  name: product.name,
+                  slug: product.slug,
+                  image: product.images[0] ?? null,
+                  price_cents: product.price_cents,
+                  quantity,
+                  inventory: product.inventory,
+                });
                 toast.success(`${product.name} added to your cart`);
               }}
+
               className="flex-1 rounded-sm bg-primary px-6 py-3 text-sm text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {soldOut ? "Sold out" : "Add to cart"}
